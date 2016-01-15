@@ -43,7 +43,7 @@ class CALC:
         self.D = self.A
 
         self.result = self.calc_Vr(self.A, self.B)
-        self.Sb = np.array(self.result[0][len(self.result[0])-1])
+        self.Sb = np.array(self.result[0][len(self.result[0])-1])/self.fp
         self.result[0] = self.result[0]/self.Sb
         self.result[3] = self.result[3]/self.Sb
 
