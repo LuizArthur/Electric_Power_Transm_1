@@ -42,6 +42,7 @@ class CALC:
         self.D = self.A
 
         self.result = self.calc_Vr(self.A, self.B)
+        self.V
         self.result2 = self.compSeM()
         self.result3 = self.compSeEx()
         #self.ang_pot = self.calc_ang_pot(self.A,self.B,np.array(self.result[0])/3,np.array(self.result[1])/np.sqrt(3))
