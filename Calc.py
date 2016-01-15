@@ -24,6 +24,7 @@ class CALC:
         self.g = self.Var["g"]
         self.l = self.Var["l"]
         self.V1 = self.Var["V1"]
+        self.Vb = self.V1
         self.fp = self.Var["fp"]
         self.f = self.Var["f"]
         self.prec = self.Var["prec"]
@@ -42,19 +43,22 @@ class CALC:
         self.D = self.A
 
         self.result = self.calc_Vr(self.A, self.B)
-        self.V
+        self.Sb = np.array(self.result[0][len(self.result[0])-1])
+        self.result[0] = self.result[0]/self.Sb
+        self.result[3] = self.result[3]/self.Sb
+
         self.result2 = self.compSeM()
         self.result3 = self.compSeEx()
         #self.ang_pot = self.calc_ang_pot(self.A,self.B,np.array(self.result[0])/3,np.array(self.result[1])/np.sqrt(3))
 
-        self.plot_all_Vr()
+        #self.plot_all_Vr()
 
-        """
+
         f = pp.figure(1)
-        pp.plot(self.result[0],self.result[4])
+        pp.plot(self.result[0],self.result[1],self.result[0],self.result[2])
         #print(self.result[4])
         pp.draw()
-        """
+
 
     def calc_Vr(self, A, B):
         Pr = []
@@ -99,7 +103,7 @@ class CALC:
 
             i = i + self.prec
 
-        return [3 * np.array(Pr), result, result2, 3*np.array(Qr), ang_pot]
+        return [3 * np.array(Pr), np.array(result)/self.Vb, np.array(result2)/self.Vb, 3*np.array(Qr), ang_pot]
 
     def calc_ang_pot(self,A,B,Pr,Vr):
         absA = abs(A)
@@ -127,7 +131,11 @@ class CALC:
             Al = A1*A1 + C1*B1 - 1j*C1*A1*Xc
             Bl = self.B - 1j*(self.A+1)*Xc/2
 
-            results.append(self.calc_Vr(Al, Bl))
+            result = self.calc_Vr(Al, Bl)
+            result[0] = result[0]/self.Sb
+            result[3] = result[3]/self.Sb
+
+            results.append(result)
 
         return results
 
@@ -149,7 +157,11 @@ class CALC:
             Xc = perc*Xcmax
             Al = self.A - 1j*self.C*Xc
             Bl = self.B - 1j*2*self.A*Xc - self.C*np.power(Xc,2)
-            results.append(self.calc_Vr(Al,Bl))
+            result = self.calc_Vr(Al, Bl)
+            result[0] = result[0]/self.Sb
+            result[3] = result[3]/self.Sb
+
+            results.append(result)
 
         return results
 
