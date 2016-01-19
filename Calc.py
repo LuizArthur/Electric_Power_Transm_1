@@ -24,6 +24,8 @@ class CALC:
         self.g = self.Var["g"]
         self.l = self.Var["l"]
         self.V1 = self.Var["V1"]
+        self.Vb = self.V1
+        self.Sb = 100e6
         self.fp = self.Var["fp"]
         self.f = self.Var["f"]
         self.prec = self.Var["prec"]
@@ -50,7 +52,7 @@ class CALC:
 
         """
         f = pp.figure(1)
-        pp.plot(self.result[0],self.result[4])
+        pp.plot(self.result[0],self.result[1],self.result[0],self.result[2])
         #print(self.result[4])
         pp.draw()
         """
@@ -98,7 +100,7 @@ class CALC:
 
             i = i + self.prec
 
-        return [3 * np.array(Pr), result, result2, 3*np.array(Qr), ang_pot]
+        return [3 * np.array(Pr)/self.Sb, np.array(result)/self.Vb, np.array(result2)/self.Vb, 3*np.array(Qr)/self.Sb, ang_pot]
 
     def calc_ang_pot(self,A,B,Pr,Vr):
         absA = abs(A)
@@ -126,7 +128,8 @@ class CALC:
             Al = A1*A1 + C1*B1 - 1j*C1*A1*Xc
             Bl = self.B - 1j*(self.A+1)*Xc/2
 
-            results.append(self.calc_Vr(Al, Bl))
+            result = self.calc_Vr(Al, Bl)
+            results.append(result)
 
         return results
 
@@ -148,7 +151,8 @@ class CALC:
             Xc = perc*Xcmax
             Al = self.A - 1j*self.C*Xc
             Bl = self.B - 1j*2*self.A*Xc - self.C*np.power(Xc,2)
-            results.append(self.calc_Vr(Al,Bl))
+            result = self.calc_Vr(Al, Bl)
+            results.append(result)
 
         return results
 
@@ -171,7 +175,7 @@ class CALC:
                 self.result2[i][1][int(0.5*len(self.result2[i][1])-1)],
                 "Curva vermelha: Comp. extr. "+str(perc*100)+"%")
             pp.xlim([0,self.result2[i][0][int(len(self.result2[i][0])-1)]+
-                10e7+10e5])
+                2])
             i = i+1
             self.count_plot = self.count_plot+1
 
@@ -182,17 +186,17 @@ class CALC:
             pp.plot(self.result3[i][0], self.result3[i][4], color="red")
             pp.plot(self.result[0], self.result[4], color="blue")
             pp.title(self.file_name+"\nPot x Angulo de Pot")
-            pp.text(self.result2[i][0][int(.1*len(self.result2[i][0])-1)],
+            pp.text(self.result2[i][0][int(.5*len(self.result2[i][0])-1)],
                 self.result[4][len(self.result[4])-1],
                 "Curva azul: Sem comp.")
-            pp.text(self.result2[i][0][int(.1*len(self.result2[i][0])-1)],
+            pp.text(self.result2[i][0][int(.5*len(self.result2[i][0])-1)],
                 self.result[4][int(0.995*len(self.result[4])-1)],
                 "Curva verde: Comp. meio "+str(perc*100)+"%")
-            pp.text(self.result2[i][0][int(.1*len(self.result2[i][0])-1)],
+            pp.text(self.result2[i][0][int(.5*len(self.result2[i][0])-1)],
                 self.result[4][int(0.98*len(self.result[4])-1)],
                 "Curva vermelha: Comp. extr. "+str(perc*100)+"%")
             pp.xlim([0,self.result2[i][0][int(len(self.result2[i][0])-1)]+
-                10e7+10e5])
+                2])
             i = i+1
             self.count_plot = self.count_plot+1
 

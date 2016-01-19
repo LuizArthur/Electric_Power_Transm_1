@@ -44,4 +44,3 @@ for name in file_name[0]:
 
 print("\nTempo de execucao: ", time.clock()-tempo)
 pp.show()
-#time.sleep(100)
