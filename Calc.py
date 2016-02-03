@@ -50,12 +50,10 @@ class CALC:
 
         self.plot_all_Vr()
 
-        """
-        f = pp.figure(1)
-        pp.plot(self.result[0],self.result[1],self.result[0],self.result[2])
-        #print(self.result[4])
-        pp.draw()
-        """
+        # f = pp.figure(1)
+        # pp.plot(self.result[0],self.result[1],self.result[0],self.result[2])
+        # print(self.result[4])
+        # pp.draw()
 
     def calc_Vr(self, A, B):
         Pr = []
