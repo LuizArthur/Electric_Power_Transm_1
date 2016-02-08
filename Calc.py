@@ -164,19 +164,12 @@ class CALC:
                 pp.plot(self.result3[i][0], self.result3[i][j], color="red")
                 pp.plot(self.result[0], self.result[j], color="blue")
                 pp.title(self.file_name+"\nPot x Vr")
-            pp.text(self.result2[i][0][int(.65*len(self.result2[i][0])-1)],
-                self.result2[i][1][0],"Curva azul: Sem comp.")
-            pp.text(self.result2[i][0][int(.65*len(self.result2[i][0])-1)],
-                self.result2[i][1][int(0.25*len(self.result2[i][1])-1)],
-                "Curva verde: Comp. meio "+str(perc*100)+"%")
-            pp.text(self.result2[i][0][int(.65*len(self.result2[i][0])-1)],
-                self.result2[i][1][int(0.5*len(self.result2[i][1])-1)],
-                "Curva vermelha: Comp. extr. "+str(perc*100)+"%")
             pp.xlim([0,self.result2[i][0][int(len(self.result2[i][0])-1)]+
                 2])
             i = i+1
             self.count_plot = self.count_plot+1
-
+            pp.legend(["Comp. meio "+str(perc*100)+"%","Comp. extr. "+str(perc*100)+"%","Sem comp."])
+        
         i = 0
         for perc in self.Var["comp"]:
             f = pp.figure(self.count_plot)
@@ -184,19 +177,11 @@ class CALC:
             pp.plot(self.result3[i][0], self.result3[i][4], color="red")
             pp.plot(self.result[0], self.result[4], color="blue")
             pp.title(self.file_name+"\nPot x Angulo de Pot")
-            pp.text(self.result2[i][0][int(.5*len(self.result2[i][0])-1)],
-                self.result[4][len(self.result[4])-1],
-                "Curva azul: Sem comp.")
-            pp.text(self.result2[i][0][int(.5*len(self.result2[i][0])-1)],
-                self.result[4][int(0.995*len(self.result[4])-1)],
-                "Curva verde: Comp. meio "+str(perc*100)+"%")
-            pp.text(self.result2[i][0][int(.5*len(self.result2[i][0])-1)],
-                self.result[4][int(0.98*len(self.result[4])-1)],
-                "Curva vermelha: Comp. extr. "+str(perc*100)+"%")
             pp.xlim([0,self.result2[i][0][int(len(self.result2[i][0])-1)]+
                 2])
             i = i+1
             self.count_plot = self.count_plot+1
+            pp.legend(["Comp. meio "+str(perc*100)+"%","Comp. extr. "+str(perc*100)+"%","Sem comp."])
 
         pp.draw()
 

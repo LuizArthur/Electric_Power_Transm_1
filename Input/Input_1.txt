@@ -6,5 +6,5 @@ l 100
 f 60
 V1 420e3
 fp .95
-comp 80
+comp 80 
 prec .01
